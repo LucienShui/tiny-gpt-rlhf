@@ -1,0 +1,6 @@
+[submodule "ChineseNlpCorpus"]
+	path = ChineseNlpCorpus
+	url = https://github.com/SophonPlus/ChineseNlpCorpus.git
+[submodule "gpt_chinese"]
+	path = gpt_chinese
+	url = git@github.com:LucienShui/GPT2-Chinese.git
