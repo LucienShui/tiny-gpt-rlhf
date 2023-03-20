@@ -14,7 +14,7 @@ from pytorch_lightning.callbacks import ModelCheckpoint, LearningRateMonitor
 import torch
 from transformers import GPT2LMHeadModel, BertTokenizer
 
-from gpt_chinese.train import Net
+from training import Net
 
 
 def init() -> logging.Logger:
@@ -76,20 +76,15 @@ def train(dataset: List[str], pretrained: str = None) -> None:
         precision=16 if torch.cuda.is_available() else 32,
     )
 
-    tokenizer: BertTokenizer = BertTokenizer.from_pretrained(pretrained) if pretrained else None
-    model: GPT2LMHeadModel = GPT2LMHeadModel.from_pretrained(pretrained) if pretrained else None
-
     net = Net(
         dataset,
         batch_size,
         n_epoch,
         config_path=config_path,
-        valid_examples=val_examples,
+        pretrained=pretrained,
         vocab_path=vocab_path,
         warm_up_steps=warmup_steps,
         lr=lr,
-        model=model,
-        tokenizer=tokenizer,
         # additional_special_tokens=Preprocessor.additional_special_tokens
     )
 
